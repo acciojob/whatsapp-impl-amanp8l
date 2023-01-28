@@ -1,33 +1,26 @@
 package com.driver;
-import org.springframework.stereotype.Service;
-import java.util.Date;
-import java.util.List;
 
-@Service
-public class WhatsappService {
-    WhatsappRepository whatsappRepository = new WhatsappRepository() ;
-    public boolean isNewUser(String mobile) {
-        return whatsappRepository.isNewUser(mobile);
+public class Group {
+    private String name;
+    private int numberOfParticipants;
+    public Group(String name, int numberOfParticipants) {
+        this.name = name;
+        this.numberOfParticipants = numberOfParticipants;
     }
 
-    public String createUser(String name, String mobile) {
-        whatsappRepository.createUser(name, mobile);
-        return "SUCCESS";
+    public String getName() {
+        return name;
     }
 
-    public Group createGroup(List<User> users) {
-        return whatsappRepository.createGroup(users);
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public int createMessage(String content) {
-        return whatsappRepository.createMessage(content);
+    public int getNumberOfParticipants() {
+        return numberOfParticipants;
     }
 
-    public int sendMessage(Message message, User sender, Group group) throws Exception {
-        return whatsappRepository.sendMessage(message, sender, group);
-    }
-
-    public String changeAdmin(User approver, User user, Group group) throws Exception {
-        return whatsappRepository.changeAdmin(approver, user, group);
+    public void setNumberOfParticipants(int numberOfParticipants) {
+        this.numberOfParticipants = numberOfParticipants;
     }
 }
