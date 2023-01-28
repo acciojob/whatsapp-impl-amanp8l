@@ -40,14 +40,12 @@ public class WhatsappRepository {
         if(!groupUserMap.containsKey(group)) throw new Exception("Group does not exist");
         if(!adminMap.get(group).equals(approver)) throw new Exception("Approver does not have rights");
         if(!this.userExistsInGroup(group, user)) throw  new Exception("User is not a participant");
-
         adminMap.put(group, user);
         return "SUCCESS";
     }
 
     public Group createGroup(List<User> users) {
         if(users.size() == 2) return this.createPersonalChat(users);
-
         this.customGroupCount++;
         String groupName = "Group " + this.customGroupCount;
         Group group = new Group(groupName, users.size());
@@ -72,10 +70,8 @@ public class WhatsappRepository {
     public int sendMessage(Message message, User sender, Group group) throws Exception{
         if(!groupUserMap.containsKey(group)) throw new Exception("Group does not exist");
         if(!this.userExistsInGroup(group, sender)) throw  new Exception("You are not allowed to send message");
-
         List<Message> messages = new ArrayList<>();
         if(groupMessageMap.containsKey(group)) messages = groupMessageMap.get(group);
-
         messages.add(message);
         groupMessageMap.put(group, messages);
         return messages.size();
@@ -86,9 +82,6 @@ public class WhatsappRepository {
         for(User user: users) {
             if(user.equals(sender)) return true;
         }
-
         return false;
     }
-
-
 }
